@@ -1,5 +1,11 @@
-import {WebpackParams} from '../../dto/app'
-const buildWebpackReactTemplate = ({entry, useTypescript, useReact, appName, type}:WebpackParams):string => {
+import { WebpackParams } from '../../dto/app'
+const buildWebpackReactTemplate = ({
+    entry,
+    useTypescript,
+    useReact,
+    appName,
+    type,
+}: WebpackParams): string => {
     let jsRules: string
     let configEntry
     let pluginConfig = ''
@@ -28,8 +34,7 @@ const buildWebpackReactTemplate = ({entry, useTypescript, useReact, appName, typ
             },`
             configEntry = 'config.tsx'
         }
-    }
-    else {
+    } else {
         configEntry = 'config.js'
         jsRules = `{
                 test: /\.js?$/,
@@ -110,26 +115,17 @@ const buildWebpackReactTemplate = ({entry, useTypescript, useReact, appName, typ
             'use strict';
             if (argv.mode === 'development') {
                 config.devtool = 'source-map';
-                ${
-                    type === 'Plugin' &&
-                    `configPlugin.devtool='source-map';`
-                }
+                ${type === 'Plugin' && `configPlugin.devtool='source-map';`}
             }
           
             if (argv.mode === 'production') {
               //...
             }
-            ${
-                type === 'Plugin' ?
-                'return [config, configPlugin];':
-                'return [config];'
-            }
+            ${type === 'Plugin' ? 'return [config, configPlugin];' : 'return [config];'}
         };`
 }
 export default {
-    buildWebpackReactTemplate
+    buildWebpackReactTemplate,
 }
 
-export {
-    buildWebpackReactTemplate
-}
+export { buildWebpackReactTemplate }
